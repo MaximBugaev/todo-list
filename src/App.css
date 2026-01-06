@@ -1,0 +1,40 @@
+.app {
+    display: flex;
+}
+
+main {
+    margin-inline: auto; 
+}
+
+.todo-title {
+    font-size: 4em;
+
+    width: fit-content;
+    border-radius: 30px;
+    margin: 20px auto;
+
+    background: -webkit-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+    background: -moz-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+    background: linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.tasks-placeholder {
+    font-size: 1.5em;
+    width: fit-content;
+    border-radius: 30px;
+    margin-inline: auto;
+
+    background: -webkit-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+    background: -moz-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+    background: linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
