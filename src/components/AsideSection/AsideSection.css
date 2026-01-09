@@ -1,73 +1,82 @@
 .aside-section {
-    padding: 20px 10px;
-    background-color: #ffffff;
-    height: 100vh;
+  padding: 20px 10px;
+  background-color: #ffffff;
+  height: 100vh;
 }
 
 .aside-section__burger-btn {
-    margin-bottom: 20px;
-}
-
-.search-form {
-    margin-bottom: 20px;
+  padding: 6px;
+  margin-bottom: 20px;
 }
 
 .search-form-container {
-    position: relative;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .search-form__input {
-    width: 100%;
-    padding: 0.75rem 3rem 0.75rem 0.75rem;
-    border-radius: 30px;
-    
-    outline: 0;
-    background-color: #ffffff;
-    border: 1px #69afff solid;
+  width: 100%;
+  padding: 0.75rem 3rem 0.75rem 0.75rem;
+  border-radius: 30px;
+
+  outline: 0;
+  background-color: #ffffff;
+  border: 1px #69afff solid;
 }
 
 .search-form__btn {
-    position: absolute;
-    right: 0.4rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    font-size: 1.1rem;
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.1rem;
 }
 
 .main-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .main-btns__btn {
-    display: flex;
-    justify-content: start;
-    gap: 12px;
-    align-items: center;
+  display: flex;
+  justify-content: start;
+  gap: 12px;
+  align-items: center;
 
-    border: 1px #69afff solid;
-    padding: 10px;
-    border-radius: 15px;
+  border: 1px #69afff solid;
+  padding: 10px;
+  border-radius: 15px;
 
-    transition: 0.1s;
+  transition: 0.1s;
 }
 
-
 .main-btns__create-btn {
-    background: -webkit-linear-gradient(270deg, rgb(255, 255, 255), rgb(105, 175, 255) 88%);
-    background: -moz-linear-gradient(270deg, rgb(255, 255, 255), rgb(105, 175, 255) 88%);
-    background: linear-gradient(270deg, rgb(255, 255, 255), rgb(105, 175, 255) 88%);
-    color: #fff;
+  background: -webkit-linear-gradient(
+    270deg,
+    rgb(255, 255, 255),
+    rgb(105, 175, 255) 88%
+  );
+  background: -moz-linear-gradient(
+    270deg,
+    rgb(255, 255, 255),
+    rgb(105, 175, 255) 88%
+  );
+  background: linear-gradient(
+    270deg,
+    rgb(255, 255, 255),
+    rgb(105, 175, 255) 88%
+  );
+  color: #fff;
 
-    box-shadow: 0 0 20px 1px rgb(105, 175, 255);
+  box-shadow: 0 0 20px 1px rgb(105, 175, 255);
 }
 
 .main-btns__btn:active {
-    opacity: 0.7;
-    padding: 7px;
+  opacity: 0.7;
+  padding: 7px;
 }

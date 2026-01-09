@@ -1,0 +1,10 @@
+.date-select {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.date-select select {
+    padding: 10px 0;
+}

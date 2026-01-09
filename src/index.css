@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   margin: 0;
@@ -6,26 +6,35 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-size: 16px;
-    color: #ffffff;
-    background: -webkit-linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
-    background: -moz-linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
-    background: linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
-    background-attachment: fixed;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  color: #ffffff;
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
+  background-attachment: fixed;
 }
 
 button {
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }
