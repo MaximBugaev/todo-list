@@ -1,32 +1,82 @@
 .app {
-    display: flex;
+  display: flex;
+  height: 100vh;
+
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
+  background-attachment: fixed;
+}
+
+.dark-mode {
+  background: -webkit-linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
+  background: -moz-linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
+  background: linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
+}
+
+.dark-mode .aside-section {
+  background-color: #434343;
+}
+
+.dark-mode .main-btns__btn {
+  color: #ffffff;
+  border-color: rgb(255, 92, 92);
+}
+
+.dark-mode .main-btns__create-btn {
+  background: -webkit-linear-gradient(90deg, rgb(122, 0, 0), rgb(255, 92, 92));
+  background: -moz-linear-gradient(90deg, rgb(122, 0, 0), rgb(255, 92, 92));
+  background: linear-gradient(90deg, rgb(122, 0, 0), rgb(255, 92, 92));
+
+  box-shadow: 0 0 20px 1px rgb(255, 92, 92);
+}
+
+.dark-mode .search-form__input {
+  background-color: #434343;
+  color: #ffffff
 }
 
 main {
-    margin-inline: auto; 
+  margin-inline: auto;
 }
 
 .gradient-color {
-    background: -webkit-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
-    background: -moz-linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
-    background: linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(255, 90, 17),
+    rgb(0, 154, 255) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(255, 90, 17),
+    rgb(0, 154, 255) 100%
+  );
+  background: linear-gradient(45deg, rgb(255, 90, 17), rgb(0, 154, 255) 100%);
 
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .todo-title {
-    font-size: 4em;
+  font-size: 4em;
 
-    width: fit-content;
-    border-radius: 30px;
-    margin: 20px auto;
+  width: fit-content;
+  border-radius: 30px;
+  margin: 20px auto;
 }
 
 .tasks-placeholder {
-    font-size: 1.5em;
-    width: fit-content;
-    border-radius: 30px;
-    margin-inline: auto;
+  font-size: 1.5em;
+  width: fit-content;
+  border-radius: 30px;
+  margin-inline: auto;
 }

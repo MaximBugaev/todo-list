@@ -2,7 +2,7 @@ import "./AsideSection.css";
 import burgerIcon from "Images/burger-icon.png";
 import calendarIcon from "Images/calendar-icon.png";
 import darkModeOffIcon from "Images/dark-mode-icon_off.png";
-// import darkModeOnIcon from "Images/dark-mode-icon_on.png";
+import darkModeOnIcon from "Images/dark-mode-icon_on.png";
 import plusIcon from "Images/plus-icon.svg";
 import searchIcon from "Images/search-icon.png";
 import tasksIcon from "Images/tasks-icon.png";
@@ -14,18 +14,25 @@ export function AsideSection({
   searchValue,
   setSearchValue,
   clearFilters,
+  changeTheme,
+  isDarkMode,
 }) {
-  const [opened, setOpened] = useState(true);
-  function closeSection() {
+  const [opened, setOpened] = useState(false);
+
+  function toggleNavigation() {
     setOpened(!opened);
   }
 
   return (
-    <aside className="aside-section">
+    <aside
+      className={
+        opened ? "aside-section aside-section_opened" : "aside-section"
+      }
+    >
       <button
         type="button"
         className="aside-section__burger-btn"
-        onClick={closeSection}
+        onClick={toggleNavigation}
       >
         <img src={burgerIcon} width={40} height={40} />
       </button>
@@ -54,7 +61,7 @@ export function AsideSection({
           onClick={onClickHandler}
         >
           <img src={plusIcon} width={30} height={30} />
-          {opened && "Cоздать задачу"}
+          <span className="main-btns__btn-name">Cоздать задачу</span>
         </button>
 
         <button
@@ -63,17 +70,21 @@ export function AsideSection({
           onClick={onCalendarClickHandler}
         >
           <img src={calendarIcon} width={30} height={30} />
-          {opened && "Календарь"}
+          <span className="main-btns__btn-name">Календарь</span>
         </button>
 
         <button type="button" className="main-btns__btn" onClick={clearFilters}>
           <img src={tasksIcon} width={30} height={30} />
-          {opened && "Все задачи"}
+          <span className="main-btns__btn-name">Все задачи</span>
         </button>
 
-        <button type="button" className="main-btns__btn">
-          <img src={darkModeOffIcon} width={30} height={30} />
-          {opened && "Тёмный режим"}
+        <button type="button" className="main-btns__btn" onClick={changeTheme}>
+          <img
+            src={isDarkMode ? darkModeOnIcon : darkModeOffIcon}
+            width={30}
+            height={30}
+          />
+          <span className="main-btns__btn-name">Тёмный режим</span>
         </button>
       </div>
     </aside>

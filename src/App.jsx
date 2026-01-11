@@ -18,7 +18,9 @@ function App() {
   const [monthFilter, setMonthFilter] = useState(null);
   const [dayFilter, setDayFilter] = useState(null);
 
-  // const [isDarkMode, setIsDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   const daysInMonth = new Date(1971, month + 1, 0).getDate();
 
@@ -82,7 +84,7 @@ function App() {
   function onClickHandler() {
     setOpened(!opened);
   }
-  
+
   const filteredTasks = tasks.filter(
     (task) =>
       (task.title.toLowerCase().includes(searchValue) ||
@@ -93,10 +95,22 @@ function App() {
   );
 
   return (
-    <div className="app">
-      <Modal open={opened}>
+    <div className={isDarkMode ? "app dark-mode" : "app"}>
+      <Modal
+        open={opened}
+        style={
+          isDarkMode
+            ? { backgroundColor: "#434343", borderColor: "rgb(255, 92, 92)" }
+            : null
+        }
+      >
         <form className="flex-container" onSubmit={onSubmitHandler}>
-          <h2 className="create-task-title">Новая задача</h2>
+          <h2
+            className="create-task-title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Новая задача
+          </h2>
           <input
             type="text"
             name="title"
@@ -112,7 +126,12 @@ function App() {
             maxLength={400}
           />
 
-          <h3 className="create-task__date-title">Срок выполнения:</h3>
+          <h3
+            className="create-task__date-title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Срок выполнения:
+          </h3>
           <div className="date-select">
             <select name="year" required>
               <option value="">Выберите год</option>
@@ -177,9 +196,21 @@ function App() {
         </form>
       </Modal>
 
-      <Modal open={calendarOpened}>
+      <Modal
+        open={calendarOpened}
+        style={
+          isDarkMode
+            ? { backgroundColor: "#434343", borderColor: "rgb(255, 92, 92)" }
+            : null
+        }
+      >
         <form className="calendar" onSubmit={onCalendarSubmit}>
-          <h2 className="calendar__title">Найти по дате</h2>
+          <h2
+            className="calendar__title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Найти по дате
+          </h2>
           <div className="date-select">
             <select name="year" required>
               <option value="">Выберите год</option>
@@ -240,6 +271,8 @@ function App() {
 
 
   // когда буду делать localStor, можно сделать кастомный хук useTasks
+
+  и еще модалку с приветствием через useEffect
   */}
 
       <AsideSection
@@ -248,10 +281,14 @@ function App() {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         clearFilters={clearFilters}
+        changeTheme={() => setIsDarkMode(!isDarkMode)}
+        isDarkMode={isDarkMode}
       />
 
       <main>
-        <h1 className="todo-title gradient-color">To Do List</h1>
+        <h1 className={isDarkMode ? "todo-title" : "todo-title gradient-color"}>
+          To Do List
+        </h1>
 
         <TodoList>
           {filteredTasks.length ? (
@@ -267,8 +304,16 @@ function App() {
               />
             ))
           ) : (
-            <p className="tasks-placeholder gradient-color">
-              Создайте первую задачу!
+            <p
+              className={
+                isDarkMode
+                  ? "tasks-placeholder"
+                  : "tasks-placeholder gradient-color"
+              }
+            >
+              {yearFilter
+                ? "Нет задач с такой датой"
+                : "Создайте первую задачу!"}
             </p>
           )}
         </TodoList>
