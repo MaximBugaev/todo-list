@@ -14,7 +14,21 @@ function App() {
   const currentMonth = new Date().getMonth();
   const [month, setMonth] = useState(currentMonth);
 
+  const [yearFilter, setYearFilter] = useState(null);
+  const [monthFilter, setMonthFilter] = useState(null);
+  const [dayFilter, setDayFilter] = useState(null);
+
+  // const [isDarkMode, setIsDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
+
   const daysInMonth = new Date(1971, month + 1, 0).getDate();
+
+  function getDate(e) {
+    return {
+      day: e.target.elements.day.value,
+      month: e.target.elements.month.value,
+      year: e.target.elements.year.value,
+    };
+  }
 
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -24,11 +38,16 @@ function App() {
     const descriptionValue = form.elements.description.value;
     const isImportant = form.elements.important.checked;
 
+    const { day, month: monthValue, year } = getDate(e);
+
     createTask({
       id: crypto.randomUUID(),
       title: titleValue,
       description: descriptionValue,
       isImportant,
+      day,
+      month: monthValue,
+      year,
     });
 
     form.elements.title.value = "";
@@ -41,14 +60,20 @@ function App() {
   function onCalendarSubmit(e) {
     e.preventDefault();
 
-    // добавить обработку формы
+    const { day, month: monthValue, year } = getDate(e);
+
+    setYearFilter(year);
+    setDayFilter(day);
+    setMonthFilter(monthValue);
+
+    setCalendarOpened(!calendarOpened);
   }
 
-  const filteredTasks = tasks.filter(
-    (task) =>
-      task.title.toLowerCase().includes(searchValue) ||
-      task.description?.toLowerCase().includes(searchValue)
-  );
+  function clearFilters() {
+    setYearFilter(null);
+    setDayFilter(null);
+    setMonthFilter(null);
+  }
 
   function createTask(task) {
     setTasks((prev) => [...prev, task]);
@@ -57,6 +82,15 @@ function App() {
   function onClickHandler() {
     setOpened(!opened);
   }
+  
+  const filteredTasks = tasks.filter(
+    (task) =>
+      (task.title.toLowerCase().includes(searchValue) ||
+        task.description?.toLowerCase().includes(searchValue)) &&
+      (task.year === yearFilter || !yearFilter) &&
+      (task.month === monthFilter || !monthFilter) &&
+      (task.day === dayFilter || !dayFilter)
+  );
 
   return (
     <div className="app">
@@ -77,6 +111,52 @@ function App() {
             className="task-description__input"
             maxLength={400}
           />
+
+          <h3 className="create-task__date-title">Срок выполнения:</h3>
+          <div className="date-select">
+            <select name="year" required>
+              <option value="">Выберите год</option>
+              {Array.from({ length: 15 }).map((_, i) => (
+                <option
+                  value={i + new Date().getFullYear()}
+                  key={i + 1}
+                  selected={i === 0}
+                  required
+                >
+                  {i + new Date().getFullYear()}
+                </option>
+              ))}
+            </select>
+
+            <select
+              name="month"
+              value={month + 1}
+              onChange={(e) => setMonth(e.target.value - 1)}
+              required
+            >
+              <option value="">Выберите месяц</option>
+              {Array.from({ length: 12 }).map((_, i) => (
+                <option value={i + 1} key={i + 1} required>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+
+            <select name="day" required>
+              <option value="">Выберите день</option>
+              {Array.from({ length: daysInMonth }).map((_, i) => (
+                <option
+                  value={i + 1}
+                  key={i + 1}
+                  selected={i === new Date().getDate() - 1}
+                  required
+                >
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <label>
             <input type="checkbox" id="important-check" name="important" />
             Important
@@ -99,26 +179,22 @@ function App() {
 
       <Modal open={calendarOpened}>
         <form className="calendar" onSubmit={onCalendarSubmit}>
+          <h2 className="calendar__title">Найти по дате</h2>
           <div className="date-select">
-            <select name="year">
+            <select name="year" required>
               <option value="">Выберите год</option>
               {Array.from({ length: 15 }).map((_, i) => (
                 <option
                   value={i + new Date().getFullYear()}
                   key={i + 1}
                   selected={i === 0}
-                  required
                 >
                   {i + new Date().getFullYear()}
                 </option>
               ))}
             </select>
 
-            <select
-              name="month"
-              value={month + 1}
-              onChange={(e) => setMonth(e.target.value - 1)}
-            >
+            <select name="month" onChange={(e) => setMonth(e.target.value - 1)}>
               <option value="">Выберите месяц</option>
               {Array.from({ length: 12 }).map((_, i) => (
                 <option value={i + 1} key={i + 1} required>
@@ -130,12 +206,7 @@ function App() {
             <select name="day">
               <option value="">Выберите день</option>
               {Array.from({ length: daysInMonth }).map((_, i) => (
-                <option
-                  value={i + 1}
-                  key={i + 1}
-                  selected={i === new Date().getDate() - 1}
-                  required
-                >
+                <option value={i + 1} key={i + 1}>
                   {i + 1}
                 </option>
               ))}
@@ -176,10 +247,11 @@ function App() {
         onCalendarClickHandler={() => setCalendarOpened(!calendarOpened)}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        clearFilters={clearFilters}
       />
 
       <main>
-        <h1 className="todo-title">To Do List</h1>
+        <h1 className="todo-title gradient-color">To Do List</h1>
 
         <TodoList>
           {filteredTasks.length ? (
@@ -188,11 +260,16 @@ function App() {
                 title={task.title}
                 description={task.description}
                 important={task.isImportant}
+                day={task.day}
+                month={task.month}
+                year={task.year}
                 key={task.id}
               />
             ))
           ) : (
-            <p className="tasks-placeholder">Создайте первую задачу!</p>
+            <p className="tasks-placeholder gradient-color">
+              Создайте первую задачу!
+            </p>
           )}
         </TodoList>
       </main>

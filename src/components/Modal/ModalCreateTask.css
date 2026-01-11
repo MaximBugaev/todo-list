@@ -23,7 +23,7 @@ label,
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.25rem;
-  color: #1a1a1a;
+  color: #525252;
 }
 
 .task-title__input {
@@ -120,4 +120,10 @@ label input[type="checkbox"] {
 
 #important-check {
   accent-color: #ffd65c;
+}
+
+.create-task__date-title {
+    margin-right: auto;
+    font-weight: 600;
+    color: #525252;
 }

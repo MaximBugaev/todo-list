@@ -13,6 +13,7 @@ export function AsideSection({
   onCalendarClickHandler,
   searchValue,
   setSearchValue,
+  clearFilters,
 }) {
   const [opened, setOpened] = useState(true);
   function closeSection() {
@@ -55,6 +56,7 @@ export function AsideSection({
           <img src={plusIcon} width={30} height={30} />
           {opened && "Cоздать задачу"}
         </button>
+
         <button
           type="button"
           className="main-btns__btn"
@@ -63,7 +65,8 @@ export function AsideSection({
           <img src={calendarIcon} width={30} height={30} />
           {opened && "Календарь"}
         </button>
-        <button type="button" className="main-btns__btn">
+
+        <button type="button" className="main-btns__btn" onClick={clearFilters}>
           <img src={tasksIcon} width={30} height={30} />
           {opened && "Все задачи"}
         </button>

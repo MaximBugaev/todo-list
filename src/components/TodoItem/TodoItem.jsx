@@ -3,7 +3,7 @@ import CompletedIcon from "@/assets/images/completed.png";
 import NotCompletedIcon from "@/assets/images/notCompleted.png";
 import { useState } from "react";
 
-export function TodoItem({ title, description, important = false }) {
+export function TodoItem({ title, description, important = false, day, month, year }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isImportant, setIsImportant] = useState(important);
 
@@ -57,6 +57,9 @@ export function TodoItem({ title, description, important = false }) {
           >
             important
           </button>
+          <span className="todo-info__date">
+            До {[day, month, year].join('.')}
+          </span>
         </div>
         <p
           className="todo-info__description"

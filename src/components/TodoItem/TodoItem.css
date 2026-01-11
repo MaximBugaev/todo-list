@@ -97,6 +97,11 @@
   opacity: 0.7;
 }
 
+.todo-info__date {
+  margin-left: auto;
+  color: #c8c8c8;
+}
+
 .todo-info__description {
   margin: 0;
   width: 500px;
