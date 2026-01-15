@@ -4,12 +4,14 @@ import { TodoItem } from "./components/TodoItem/TodoItem";
 import { Modal } from "./components/Modal/Modal";
 import { useState } from "react";
 import { AsideSection } from "./components/AsideSection/AsideSection";
+import { useInput } from "./hooks/useInput";
+import { useDarkMode } from "./hooks/useDarkMode";
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [opened, setOpened] = useState(false);
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const searchInput = useInput("");
 
   const currentMonth = new Date().getMonth();
   const [month, setMonth] = useState(currentMonth);
@@ -18,9 +20,7 @@ function App() {
   const [monthFilter, setMonthFilter] = useState(null);
   const [dayFilter, setDayFilter] = useState(null);
 
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  const { isDarkMode, toggle } = useDarkMode()
 
   const daysInMonth = new Date(1971, month + 1, 0).getDate();
 
@@ -87,8 +87,8 @@ function App() {
 
   const filteredTasks = tasks.filter(
     (task) =>
-      (task.title.toLowerCase().includes(searchValue) ||
-        task.description?.toLowerCase().includes(searchValue)) &&
+      (task.title.toLowerCase().includes(searchInput.value) ||
+        task.description?.toLowerCase().includes(searchInput.value)) &&
       (task.year === yearFilter || !yearFilter) &&
       (task.month === monthFilter || !monthFilter) &&
       (task.day === dayFilter || !dayFilter)
@@ -278,10 +278,9 @@ function App() {
       <AsideSection
         onClickHandler={onClickHandler}
         onCalendarClickHandler={() => setCalendarOpened(!calendarOpened)}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+        searchInput={searchInput}
         clearFilters={clearFilters}
-        changeTheme={() => setIsDarkMode(!isDarkMode)}
+        changeMode={toggle}
         isDarkMode={isDarkMode}
       />
 

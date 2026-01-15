@@ -8,7 +8,6 @@ export function Modal({ children, open, style }) {
 
   useEffect(() => {
     if (open) {
-      // dialog.current.showModal();
       dialog.current.showModal();
     } else {
       dialog.current.close();

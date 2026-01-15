@@ -11,10 +11,9 @@ import { useState } from "react";
 export function AsideSection({
   onClickHandler,
   onCalendarClickHandler,
-  searchValue,
-  setSearchValue,
+  searchInput,
   clearFilters,
-  changeTheme,
+  changeMode,
   isDarkMode,
 }) {
   const [opened, setOpened] = useState(false);
@@ -42,8 +41,7 @@ export function AsideSection({
           <input
             type="text"
             maxLength={100}
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            {...searchInput}
             placeholder="Поиск задачи..."
             className="search-form__input"
             name="searchFormInput"
@@ -78,7 +76,7 @@ export function AsideSection({
           <span className="main-btns__btn-name">Все задачи</span>
         </button>
 
-        <button type="button" className="main-btns__btn" onClick={changeTheme}>
+        <button type="button" className="main-btns__btn" onClick={changeMode}>
           <img
             src={isDarkMode ? darkModeOnIcon : darkModeOffIcon}
             width={30}

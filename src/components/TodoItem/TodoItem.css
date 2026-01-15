@@ -22,7 +22,7 @@
   background: linear-gradient(90deg, rgb(102, 102, 102), rgb(74, 90, 116) 100%);
 
   margin-bottom: 20px;
-  transition: 0.2s;
+  transition: color 0.2s;
 }
 
 .todo-list-item_important {
