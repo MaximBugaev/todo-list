@@ -1,6 +1,7 @@
 .todo-list-item {
   display: flex;
   align-items: center;
+  position: relative;
 
   /* width: fit-content; */
   /* max-width: 80vw; */
@@ -106,4 +107,11 @@
   margin: 0;
   width: 500px;
   word-wrap: break-word;
+}
+
+.todo-list-item__close-btn {
+  position: absolute;
+
+  right: 0.7%;
+  top: 2%;
 }

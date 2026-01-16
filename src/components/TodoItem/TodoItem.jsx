@@ -3,22 +3,18 @@ import CompletedIcon from "@/assets/images/completed.png";
 import NotCompletedIcon from "@/assets/images/notCompleted.png";
 import { useState } from "react";
 
-export function TodoItem({ title, description, important = false, day, month, year }) {
+export function TodoItem({ title, description, important = false, day, month, year, removeTask, makeImportant }) {
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isImportant, setIsImportant] = useState(important);
+  // const [isImportant, setIsImportant] = useState(important);
 
   function onClickCompletedHandler() {
     setIsCompleted(!isCompleted);
   }
 
-  function onClickImportantHandler() {
-    setIsImportant(!isImportant);
-  }
-
   return (
     <li
       className={
-        isImportant
+        important
           ? "todo-list-item todo-list-item_important"
           : "todo-list-item"
       }
@@ -48,9 +44,9 @@ export function TodoItem({ title, description, important = false, day, month, ye
             {title}
           </h2>
           <button
-            onClick={onClickImportantHandler}
+            onClick={makeImportant}
             className={
-              isImportant
+              important
                 ? "todo-info__important-btn todo-info__important-btn_active"
                 : "todo-info__important-btn"
             }
@@ -68,6 +64,7 @@ export function TodoItem({ title, description, important = false, day, month, ye
           {description}
         </p>
       </div>
+      <button type="button" className="todo-list-item__close-btn" onClick={removeTask}>❌</button>
     </li>
   );
 }

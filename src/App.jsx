@@ -6,9 +6,10 @@ import { useState } from "react";
 import { AsideSection } from "./components/AsideSection/AsideSection";
 import { useInput } from "./hooks/useInput";
 import { useDarkMode } from "./hooks/useDarkMode";
+import { useTasks } from "./hooks/useTasks.";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, createTask, removeTask, makeImportant, makeCompleted } = useTasks(); 
   const [opened, setOpened] = useState(false);
   const [calendarOpened, setCalendarOpened] = useState(false);
   const searchInput = useInput("");
@@ -77,10 +78,6 @@ function App() {
     setMonthFilter(null);
   }
 
-  function createTask(task) {
-    setTasks((prev) => [...prev, task]);
-  }
-
   function onClickHandler() {
     setOpened(!opened);
   }
@@ -95,7 +92,7 @@ function App() {
   );
 
   return (
-    <div className={isDarkMode ? "app dark-mode" : "app"}>
+    <div className="app">
       <Modal
         open={opened}
         style={
@@ -300,6 +297,9 @@ function App() {
                 month={task.month}
                 year={task.year}
                 key={task.id}
+                removeTask={() => removeTask(task.id)}
+                makeImportant={() => makeImportant(task.id)}
+                makeCompleted={() => makeCompleted(task.id)}
               />
             ))
           ) : (

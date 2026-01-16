@@ -18,6 +18,27 @@ body {
   font-optical-sizing: auto;
   font-size: 16px;
   color: #ffffff;
+
+    height: 100vh;
+
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(96, 255, 219),
+    rgb(255, 235, 88) 100%
+  );
+  background: linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
+  background-attachment: fixed;
+}
+
+.dark-mode {
+  background: -webkit-linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
+  background: -moz-linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
+  background: linear-gradient(45deg, rgb(122, 0, 0), rgb(0, 156, 161));
 }
 
 button {
