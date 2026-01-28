@@ -142,4 +142,9 @@
     width: 45px;
     height: 45px;
   }
+
+  .todo-list-item__close-btn {
+    font-size: 1.5em;
+    right: 5px;
+  }
 }

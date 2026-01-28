@@ -127,3 +127,13 @@ label input[type="checkbox"] {
     font-weight: 600;
     color: #525252;
 }
+
+.date-select select {
+  width: 100px;
+}
+
+@media (max-width: 768px) {
+  .create-task__date-title {
+    font-size: 2.5em;
+  }
+}
