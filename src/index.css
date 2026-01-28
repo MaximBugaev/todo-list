@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root {
+  --light-left-gradient-col: rgb(96, 255, 219);
+  --light-right-gradient-col: rgb(255, 235, 88) 100%;
+  --dark-left-gradient-col: rgb(122, 0, 0);
+  --dark-right-gradient-col: rgb(0, 156, 161);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,17 +25,44 @@ body {
   font-optical-sizing: auto;
   font-size: 16px;
   color: #ffffff;
+
+  height: 100%;
+
   background: -webkit-linear-gradient(
     45deg,
-    rgb(96, 255, 219),
-    rgb(255, 235, 88) 100%
+    var(--light-left-gradient-col),
+    var(--light-right-gradient-col)
   );
   background: -moz-linear-gradient(
     45deg,
-    rgb(96, 255, 219),
-    rgb(255, 235, 88) 100%
+    var(--light-left-gradient-col),
+    var(--light-right-gradient-col)
   );
-  background: linear-gradient(45deg, rgb(96, 255, 219), rgb(255, 235, 88) 100%);
+  background: linear-gradient(
+    45deg,
+    var(--light-left-gradient-col),
+    var(--light-right-gradient-col)
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.dark-mode {
+  background: -webkit-linear-gradient(
+    45deg,
+    var(--dark-left-gradient-col),
+    var(--dark-right-gradient-col)
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    var(--dark-left-gradient-col),
+    var(--dark-right-gradient-col)
+  );
+  background: linear-gradient(
+    45deg,
+    var(--dark-left-gradient-col),
+    var(--dark-right-gradient-col)
+  );
   background-attachment: fixed;
 }
 
@@ -37,4 +71,26 @@ button {
   background: none;
   padding: 0;
   cursor: pointer;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+@media (max-width: 1200px) {
+  body {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.5em;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 0.4em;
+  }
 }

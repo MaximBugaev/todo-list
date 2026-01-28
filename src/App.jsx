@@ -4,12 +4,16 @@ import { TodoItem } from "./components/TodoItem/TodoItem";
 import { Modal } from "./components/Modal/Modal";
 import { useState } from "react";
 import { AsideSection } from "./components/AsideSection/AsideSection";
+import { useInput } from "./hooks/useInput";
+import { useDarkMode } from "./hooks/useDarkMode";
+import { useTasks } from "./hooks/useTasks.";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, createTask, removeTask, makeImportant, makeCompleted } =
+    useTasks();
   const [opened, setOpened] = useState(false);
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const searchInput = useInput("");
 
   const currentMonth = new Date().getMonth();
   const [month, setMonth] = useState(currentMonth);
@@ -18,7 +22,7 @@ function App() {
   const [monthFilter, setMonthFilter] = useState(null);
   const [dayFilter, setDayFilter] = useState(null);
 
-  // const [isDarkMode, setIsDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const { isDarkMode, toggle } = useDarkMode();
 
   const daysInMonth = new Date(1971, month + 1, 0).getDate();
 
@@ -75,44 +79,57 @@ function App() {
     setMonthFilter(null);
   }
 
-  function createTask(task) {
-    setTasks((prev) => [...prev, task]);
-  }
-
   function onClickHandler() {
     setOpened(!opened);
   }
-  
+
   const filteredTasks = tasks.filter(
     (task) =>
-      (task.title.toLowerCase().includes(searchValue) ||
-        task.description?.toLowerCase().includes(searchValue)) &&
+      (task.title.toLowerCase().includes(searchInput.value) ||
+        task.description?.toLowerCase().includes(searchInput.value)) &&
       (task.year === yearFilter || !yearFilter) &&
       (task.month === monthFilter || !monthFilter) &&
-      (task.day === dayFilter || !dayFilter)
+      (task.day === dayFilter || !dayFilter),
   );
 
   return (
     <div className="app">
-      <Modal open={opened}>
+      <Modal
+        open={opened}
+        style={
+          isDarkMode
+            ? { backgroundColor: "#434343", borderColor: "rgb(255, 92, 92)" }
+            : null
+        }
+      >
         <form className="flex-container" onSubmit={onSubmitHandler}>
-          <h2 className="create-task-title">Новая задача</h2>
+          <h2
+            className="create-task-title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Новая задача
+          </h2>
           <input
             type="text"
             name="title"
             className="task-title__input"
             placeholder="Введите название задачи"
             required
-            maxLength={100}
+            maxLength={50}
           />
           <textarea
             name="description"
             placeholder="Введите описание задачи"
             className="task-description__input"
-            maxLength={400}
+            maxLength={200}
           />
 
-          <h3 className="create-task__date-title">Срок выполнения:</h3>
+          <h3
+            className="create-task__date-title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Срок выполнения:
+          </h3>
           <div className="date-select">
             <select name="year" required>
               <option value="">Выберите год</option>
@@ -177,9 +194,21 @@ function App() {
         </form>
       </Modal>
 
-      <Modal open={calendarOpened}>
+      <Modal
+        open={calendarOpened}
+        style={
+          isDarkMode
+            ? { backgroundColor: "#434343", borderColor: "rgb(255, 92, 92)" }
+            : null
+        }
+      >
         <form className="calendar" onSubmit={onCalendarSubmit}>
-          <h2 className="calendar__title">Найти по дате</h2>
+          <h2
+            className="calendar__title"
+            style={isDarkMode ? { color: "#ffffff" } : null}
+          >
+            Найти по дате
+          </h2>
           <div className="date-select">
             <select name="year" required>
               <option value="">Выберите год</option>
@@ -227,31 +256,19 @@ function App() {
           </div>
         </form>
       </Modal>
-
-      {/* 
-  ASIDE NAVIGATION + сделать сортировку задач
-  поиск задач (по тегам тоже)
-  1. сюда кнопку создать + выделить её как-то
-  2. календарь
-  3. dark mode
-
-  (в mobile ver сделать иконки без названий)
-  но для начала сделай адаптивность, затем localStorage
-
-
-  // когда буду делать localStor, можно сделать кастомный хук useTasks
-  */}
-
       <AsideSection
         onClickHandler={onClickHandler}
         onCalendarClickHandler={() => setCalendarOpened(!calendarOpened)}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+        searchInput={searchInput}
         clearFilters={clearFilters}
+        changeMode={toggle}
+        isDarkMode={isDarkMode}
       />
 
       <main>
-        <h1 className="todo-title gradient-color">To Do List</h1>
+        <h1 className={isDarkMode ? "todo-title" : "todo-title gradient-color"}>
+          To Do List
+        </h1>
 
         <TodoList>
           {filteredTasks.length ? (
@@ -259,16 +276,28 @@ function App() {
               <TodoItem
                 title={task.title}
                 description={task.description}
-                important={task.isImportant}
+                isImportant={task.isImportant}
+                isCompleted={task.isCompleted}
                 day={task.day}
                 month={task.month}
                 year={task.year}
                 key={task.id}
+                removeTask={() => removeTask(task.id)}
+                makeImportant={() => makeImportant(task)}
+                makeCompleted={() => makeCompleted(task)}
               />
             ))
           ) : (
-            <p className="tasks-placeholder gradient-color">
-              Создайте первую задачу!
+            <p
+              className={
+                isDarkMode
+                  ? "tasks-placeholder"
+                  : "tasks-placeholder gradient-color"
+              }
+            >
+              {yearFilter
+                ? "Нет задач с такой датой"
+                : "Создайте первую задачу!"}
             </p>
           )}
         </TodoList>
