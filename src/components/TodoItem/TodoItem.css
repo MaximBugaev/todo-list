@@ -10,18 +10,22 @@
   margin-inline: auto;
   color: #ffffff;
 
-  background: -webkit-linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
-  background: -moz-linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
-  background: linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
+  background: -webkit-linear-gradient(
+    90deg,
+    rgb(143, 76, 76),
+    rgb(161, 161, 161)
+  );
+  background: -moz-linear-gradient(90deg, rgb(143, 76, 76), rgb(161, 161, 161));
+  background: linear-gradient(90deg, rgb(143, 76, 76), rgb(161, 161, 161));
 
   margin-bottom: 20px;
   transition: 0.2s;
 }
 
 .todo-list-item_important {
-  color: #8f6900;
+  color: #ffd04d;
   background-color: #797979;
-  border: 3px solid #846100;
+  border: 3px solid #ffd051;
 }
 
 .todo-list-item__state {
@@ -41,6 +45,11 @@
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
+
+-webkit-box-shadow: 4px 4px 19px 0px rgba(34, 60, 80, 0.81);
+-moz-box-shadow: 4px 4px 19px 0px rgba(34, 60, 80, 0.81);
+box-shadow: 4px 4px 19px 0px rgba(34, 60, 80, 0.81);
+
   transition: 0.2s;
 }
 
@@ -117,7 +126,7 @@
 
 @media (max-width: 1200px) {
   .todo-list-item {
-    max-width: 80%
+    max-width: 80%;
   }
 
   .todo-list-item__state {
