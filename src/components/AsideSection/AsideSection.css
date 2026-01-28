@@ -114,3 +114,34 @@
     padding: 15px 5px 0;
   }
 }
+
+@media (max-width: 576px) {
+  .aside-section {
+    width: 50px;
+  }
+
+  .aside-section_opened .main-btns__btn{
+    display: flex;
+    padding: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .aside-section img {
+    display: block;
+    margin-inline: auto;
+    width: 20px;
+    height: 20px;
+  }
+
+  .aside-section_opened img {
+    margin: 0;
+  }
+
+  .main-btns__btn {
+    display: block;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+  }
+}
