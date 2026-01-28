@@ -1,37 +1,40 @@
 import "./TodoItem.css";
 import CompletedIcon from "@/assets/images/completed.png";
 import NotCompletedIcon from "@/assets/images/notCompleted.png";
-import { useState } from "react";
 
-export function TodoItem({ title, description, important = false, day, month, year, removeTask, makeImportant }) {
-  const [isCompleted, setIsCompleted] = useState(false);
-  // const [isImportant, setIsImportant] = useState(important);
-
-  function onClickCompletedHandler() {
-    setIsCompleted(!isCompleted);
-  }
-
+export function TodoItem({
+  title,
+  description,
+  isImportant = false,
+  isCompleted = false,
+  day,
+  month,
+  year,
+  removeTask,
+  makeImportant,
+  makeCompleted,
+}) {
   return (
     <li
       className={
-        important
+        isImportant
           ? "todo-list-item todo-list-item_important"
           : "todo-list-item"
       }
     >
       <button
-        onClick={onClickCompletedHandler}
+        onClick={makeCompleted}
         className="todo-list-item__state"
         style={
-          !isCompleted
+          isCompleted
             ? {
-                backgroundColor: "#ffbc58ff",
-                backgroundImage: `url(${NotCompletedIcon})`,
-              }
-            : {
                 backgroundColor: "#4caf50",
                 backgroundImage: `url(${CompletedIcon})`,
                 backgroundSize: "80%",
+              }
+            : {
+                backgroundColor: "#ffbc58ff",
+                backgroundImage: `url(${NotCompletedIcon})`,
               }
         }
       ></button>
@@ -46,15 +49,18 @@ export function TodoItem({ title, description, important = false, day, month, ye
           <button
             onClick={makeImportant}
             className={
-              important
+              isImportant
                 ? "todo-info__important-btn todo-info__important-btn_active"
                 : "todo-info__important-btn"
             }
           >
             important
           </button>
-          <span className="todo-info__date">
-            До {[day, month, year].join('.')}
+          <span
+            className="todo-info__date"
+            style={isCompleted ? { textDecoration: "line-through" } : null}
+          >
+            До {[day, month, year].join(".")}
           </span>
         </div>
         <p
@@ -64,7 +70,13 @@ export function TodoItem({ title, description, important = false, day, month, ye
           {description}
         </p>
       </div>
-      <button type="button" className="todo-list-item__close-btn" onClick={removeTask}>❌</button>
+      <button
+        type="button"
+        className="todo-list-item__close-btn"
+        onClick={removeTask}
+      >
+        ❌
+      </button>
     </li>
   );
 }

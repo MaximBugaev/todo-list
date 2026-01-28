@@ -14,12 +14,26 @@ export function useTasks() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
-  function makeImportant(id) {
-    
+  function makeImportant(taskToUpdate) {
+    const changedTask = {
+      ...taskToUpdate,
+      isImportant: !taskToUpdate.isImportant,
+    };
+
+    setTasks((tasks) =>
+      tasks.map((task) => (task.id === taskToUpdate.id ? changedTask : task)),
+    );
   }
 
-  function makeCompleted(id) {
+  function makeCompleted(taskToUpdate) {
+    const changedTask = {
+      ...taskToUpdate,
+      isCompleted: !taskToUpdate.isCompleted,
+    };
 
+    setTasks((tasks) =>
+      tasks.map((task) => (task.id === taskToUpdate.id ? changedTask : task)),
+    );
   }
 
   return {

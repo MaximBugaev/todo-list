@@ -1,6 +1,27 @@
 .app {
   display: flex;
 }
+
+.dark-mode .todo-list-item {
+    background: -webkit-linear-gradient(
+    90deg,
+    rgb(102, 102, 102),
+    rgb(74, 90, 116) 100%
+  );
+  background: -moz-linear-gradient(
+    90deg,
+    rgb(102, 102, 102),
+    rgb(74, 90, 116) 100%
+  );
+  background: linear-gradient(90deg, rgb(102, 102, 102), rgb(74, 90, 116) 100%);
+}
+
+.dark-mode .todo-list-item_important {
+  color: #ffd04d;
+  background-color: #797979;
+  border: 3px solid #ffd051;
+}
+
 .dark-mode .aside-section {
   background-color: #434343;
 }

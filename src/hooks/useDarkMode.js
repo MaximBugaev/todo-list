@@ -23,9 +23,9 @@ export function useDarkMode() {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e) => {
-      // if (localStorage.getItem("darkMode") === null) {
-      setIsDarkMode(e.matches);
-      // }
+      if (localStorage.getItem("darkMode") === null) {
+        setIsDarkMode(e.matches);
+      }
     };
 
     mediaQuery.addEventListener("change", handleChange);

@@ -9,7 +9,8 @@ import { useDarkMode } from "./hooks/useDarkMode";
 import { useTasks } from "./hooks/useTasks.";
 
 function App() {
-  const { tasks, createTask, removeTask, makeImportant, makeCompleted } = useTasks(); 
+  const { tasks, createTask, removeTask, makeImportant, makeCompleted } =
+    useTasks();
   const [opened, setOpened] = useState(false);
   const [calendarOpened, setCalendarOpened] = useState(false);
   const searchInput = useInput("");
@@ -21,7 +22,7 @@ function App() {
   const [monthFilter, setMonthFilter] = useState(null);
   const [dayFilter, setDayFilter] = useState(null);
 
-  const { isDarkMode, toggle } = useDarkMode()
+  const { isDarkMode, toggle } = useDarkMode();
 
   const daysInMonth = new Date(1971, month + 1, 0).getDate();
 
@@ -88,7 +89,7 @@ function App() {
         task.description?.toLowerCase().includes(searchInput.value)) &&
       (task.year === yearFilter || !yearFilter) &&
       (task.month === monthFilter || !monthFilter) &&
-      (task.day === dayFilter || !dayFilter)
+      (task.day === dayFilter || !dayFilter),
   );
 
   return (
@@ -114,13 +115,13 @@ function App() {
             className="task-title__input"
             placeholder="Введите название задачи"
             required
-            maxLength={100}
+            maxLength={50}
           />
           <textarea
             name="description"
             placeholder="Введите описание задачи"
             className="task-description__input"
-            maxLength={400}
+            maxLength={200}
           />
 
           <h3
@@ -255,23 +256,6 @@ function App() {
           </div>
         </form>
       </Modal>
-
-      {/* 
-  ASIDE NAVIGATION + сделать сортировку задач
-  поиск задач (по тегам тоже)
-  1. сюда кнопку создать + выделить её как-то
-  2. календарь
-  3. dark mode
-
-  (в mobile ver сделать иконки без названий)
-  но для начала сделай адаптивность, затем localStorage
-
-
-  // когда буду делать localStor, можно сделать кастомный хук useTasks
-
-  и еще модалку с приветствием через useEffect
-  */}
-
       <AsideSection
         onClickHandler={onClickHandler}
         onCalendarClickHandler={() => setCalendarOpened(!calendarOpened)}
@@ -292,14 +276,15 @@ function App() {
               <TodoItem
                 title={task.title}
                 description={task.description}
-                important={task.isImportant}
+                isImportant={task.isImportant}
+                isCompleted={task.isCompleted}
                 day={task.day}
                 month={task.month}
                 year={task.year}
                 key={task.id}
                 removeTask={() => removeTask(task.id)}
-                makeImportant={() => makeImportant(task.id)}
-                makeCompleted={() => makeCompleted(task.id)}
+                makeImportant={() => makeImportant(task)}
+                makeCompleted={() => makeCompleted(task)}
               />
             ))
           ) : (

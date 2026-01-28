@@ -23,68 +23,75 @@ export function AsideSection({
   }
 
   return (
-    <aside
-      className={
-        opened ? "aside-section aside-section_opened" : "aside-section"
-      }
-    >
-      <button
-        type="button"
-        className="aside-section__burger-btn"
-        onClick={toggleNavigation}
+    <>
+      {opened && <div className="aside-overlay"></div>}
+      <aside
+        className={
+          opened ? "aside-section aside-section_opened" : "aside-section"
+        }
       >
-        <img src={burgerIcon} width={40} height={40} />
-      </button>
+        <button
+          type="button"
+          className="aside-section__burger-btn"
+          onClick={toggleNavigation}
+        >
+          <img src={burgerIcon} width={40} height={40} />
+        </button>
 
-      {opened && (
-        <div className="search-form-container">
-          <input
-            type="text"
-            maxLength={100}
-            {...searchInput}
-            placeholder="Поиск задачи..."
-            className="search-form__input"
-            name="searchFormInput"
-          />
-          <button className="search-form__btn">
-            <img src={searchIcon} width={30} height={30} />
+        {opened && (
+          <div className="search-form-container">
+            <input
+              type="text"
+              maxLength={100}
+              {...searchInput}
+              placeholder="Поиск задачи..."
+              className="search-form__input"
+              name="searchFormInput"
+            />
+            <button className="search-form__btn">
+              <img src={searchIcon} width={30} height={30} />
+            </button>
+          </div>
+        )}
+
+        <div className="main-btns">
+          <button
+            type="button"
+            className="main-btns__btn  main-btns__create-btn"
+            onClick={onClickHandler}
+          >
+            <img src={plusIcon} width={30} height={30} />
+            <span className="main-btns__btn-name">Cоздать задачу</span>
+          </button>
+
+          <button
+            type="button"
+            className="main-btns__btn"
+            onClick={onCalendarClickHandler}
+          >
+            <img src={calendarIcon} width={30} height={30} />
+            <span className="main-btns__btn-name">Календарь</span>
+          </button>
+
+          <button
+            type="button"
+            className="main-btns__btn"
+            onClick={clearFilters}
+          >
+            <img src={tasksIcon} width={30} height={30} />
+            <span className="main-btns__btn-name">Все задачи</span>
+          </button>
+
+          <button type="button" className="main-btns__btn" onClick={changeMode}>
+            <img
+              src={isDarkMode ? darkModeOnIcon : darkModeOffIcon}
+              width={30}
+              height={30}
+            />
+            <span className="main-btns__btn-name">Тёмный режим</span>
           </button>
         </div>
-      )}
-
-      <div className="main-btns">
-        <button
-          type="button"
-          className="main-btns__btn  main-btns__create-btn"
-          onClick={onClickHandler}
-        >
-          <img src={plusIcon} width={30} height={30} />
-          <span className="main-btns__btn-name">Cоздать задачу</span>
-        </button>
-
-        <button
-          type="button"
-          className="main-btns__btn"
-          onClick={onCalendarClickHandler}
-        >
-          <img src={calendarIcon} width={30} height={30} />
-          <span className="main-btns__btn-name">Календарь</span>
-        </button>
-
-        <button type="button" className="main-btns__btn" onClick={clearFilters}>
-          <img src={tasksIcon} width={30} height={30} />
-          <span className="main-btns__btn-name">Все задачи</span>
-        </button>
-
-        <button type="button" className="main-btns__btn" onClick={changeMode}>
-          <img
-            src={isDarkMode ? darkModeOnIcon : darkModeOffIcon}
-            width={30}
-            height={30}
-          />
-          <span className="main-btns__btn-name">Тёмный режим</span>
-        </button>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

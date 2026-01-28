@@ -1,7 +1,25 @@
 .todo-list {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0;
   padding: 0;
   list-style: none;
   margin-inline: auto;
+}
+
+@media (max-width: 1200px) {
+  .todo-list {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-list {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+  .todo-list {
+    max-width: 320px;
+  }
 }

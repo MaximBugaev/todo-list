@@ -1,35 +1,27 @@
 .todo-list-item {
   display: flex;
+  width: 770px;
+  box-sizing: border-box;
   align-items: center;
   position: relative;
 
-  /* width: fit-content; */
-  /* max-width: 80vw; */
-  width: 100%;
   padding: 15px;
   border-radius: 15px;
   margin-inline: auto;
   color: #ffffff;
-  background: -webkit-linear-gradient(
-    90deg,
-    rgb(102, 102, 102),
-    rgb(74, 90, 116) 100%
-  );
-  background: -moz-linear-gradient(
-    90deg,
-    rgb(102, 102, 102),
-    rgb(74, 90, 116) 100%
-  );
-  background: linear-gradient(90deg, rgb(102, 102, 102), rgb(74, 90, 116) 100%);
+
+  background: -webkit-linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
+  background: -moz-linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
+  background: linear-gradient(90deg, rgb(208, 208, 208), rgb(161, 161, 161));
 
   margin-bottom: 20px;
-  transition: color 0.2s;
+  transition: 0.2s;
 }
 
 .todo-list-item_important {
-  color: #ffd45e;
+  color: #8f6900;
   background-color: #797979;
-  border: 3px solid #ffd45e;
+  border: 3px solid #846100;
 }
 
 .todo-list-item__state {
@@ -57,9 +49,14 @@
 }
 
 .title-container {
-  display: flex;
+  display: inline-flex;
+  width: 100%;
   align-items: center;
   gap: 15px;
+}
+
+.todo-info {
+  width: 50%;
 }
 
 .todo-info__title {
@@ -67,7 +64,7 @@
   font-weight: 700;
   margin-bottom: 5px;
 
-  max-width: 60%;
+  max-width: 50%;
   word-wrap: break-word;
 }
 
@@ -99,13 +96,15 @@
 }
 
 .todo-info__date {
-  margin-left: auto;
-  color: #c8c8c8;
+  display: block;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #ffffff;
 }
 
 .todo-info__description {
   margin: 0;
-  width: 500px;
   word-wrap: break-word;
 }
 
@@ -114,4 +113,33 @@
 
   right: 0.7%;
   top: 2%;
+}
+
+@media (max-width: 1200px) {
+  .todo-list-item {
+    max-width: 80%
+  }
+
+  .todo-list-item__state {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-list-item {
+    padding: 5px;
+  }
+
+  .todo-info__important-btn {
+    font-size: 0.5em;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .todo-list-item__state {
+    width: 45px;
+    height: 45px;
+  }
 }
